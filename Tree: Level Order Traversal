@@ -1,0 +1,22 @@
+arrr = []
+
+def LvlOrder(root, level):
+    
+    if root == None:
+        return 
+    
+    temp = []
+    temp.append(root.info)
+    temp.append(level)
+    arrr.append(temp)
+        
+    LvlOrder(root.left, level + 1)
+    LvlOrder(root.right, level + 1)    
+
+def levelOrder(root):
+    level = 0
+    LvlOrder(root, level)
+    arrr.sort(key = lambda x: x[1]) ## Sort w.r.t the second element, i.e the levels
+    
+    for i in range(0, len(arrr)):
+        print(arrr[i][0], end = " ")
