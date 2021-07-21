@@ -1,0 +1,63 @@
+arrr = []
+val_vals = []
+
+arr_left = []
+vals_left = []
+
+arr_right = []
+vals_right = []
+
+def topleft(root, val):
+    if root == None: 
+        return
+    
+    if val <= 0 and val not in val_vals:
+        val_vals.insert(0, val)
+        arrr.insert(0, root.info)
+    
+    topleft(root.left, val-1)        
+    topleft(root.right, val+1)
+    
+    ## The nodes which start from the left and goes furthuer than the furthest node from the right of the root node 
+    if val > 0 and val not in vals_left:
+        arr_left.append(root.info)
+        vals_left.append(val)
+        
+def topright(root, val):
+    if root == None: 
+        return
+    
+    if val > 0 and val not in val_vals:
+        val_vals.append(val)
+        arrr.append(root.info)
+    
+    topright(root.right, val+1)
+    topright(root.left, val-1)
+    
+    ## The nodes which start from the right and goes furthuer than the furthest node from the left of the root node 
+    if val < 0 and val not in vals_right:
+        arr_right.append(root.info)
+        vals_right.append(val)        
+    
+        
+def topView(root):
+    val = 0
+    topleft(root, val)
+    topright(root, val)
+    
+    ## To append the values which start from the right and goes further than the left most node
+    min_val = min(val_vals)
+    for i in range(0, len(vals_right)):
+        if vals_right[i] < min_val:
+            val_vals.insert(0, vals_right[i])
+            arrr.insert(0,arr_right[i])
+    
+    ## To append the values which start from the left and goes further than the right most node
+    max_val = max(val_vals)
+    for i in range(0, len(vals_left)):
+        if vals_left[i] > max_val:
+            val_vals.append(vals_left[i])
+            arrr.append(arr_left[i])
+    
+    for i in range(0, len(arrr)):
+        print(arrr[i], end = " ")
