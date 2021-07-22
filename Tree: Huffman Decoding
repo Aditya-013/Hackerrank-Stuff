@@ -1,3 +1,5 @@
+## FIRST TRY
+
 def Huffman(root, s, i):
     
     if root == None:
@@ -32,3 +34,38 @@ def decodeHuff(root, s):
             j = i
         if i == None:
             i = j
+            
+            
+            
+            
+            
+            
+## SECOND TRY 
+
+
+
+
+
+   
+def Huffman(root, s):
+    
+    if root == None:
+        return
+    
+    if root.right == None and root.left == None:
+        print(root.data, end="")
+    elif s[0] == '1':
+        s = s[1:]
+        s = Huffman(root.right, s)
+    elif s[0] == '0':
+        s = s[1:] 
+        s = Huffman(root.left, s)
+        
+    return s
+  
+    
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+def decodeHuff(root, s):
+    
+    while len(s) > 0:
+        s = Huffman(root, s)
