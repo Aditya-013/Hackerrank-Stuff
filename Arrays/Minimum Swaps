@@ -1,0 +1,23 @@
+def check(j, arr):
+    
+    for i in range(j+1, len(arr)):
+        if arr[i] == j+1:
+            temp = arr[i]
+            arr[i] = arr[j]
+            arr[j] = temp
+            return 1
+        
+# Complete the minimumSwaps function below.
+def minimumSwaps(arr):
+    swaps = 0
+    for i in range(0, len(arr)):
+        while arr[i] != i+1:
+            val = i
+            temp = arr[i]
+            arr[i] = arr[arr[val]-1]
+            # print(arr)
+            arr[temp - 1] = temp
+            # print(arr)
+            swaps = swaps + 1
+        
+    return swaps
