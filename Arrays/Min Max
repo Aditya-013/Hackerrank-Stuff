@@ -1,0 +1,9 @@
+def maxMin(k, arr):
+    n = len(arr)
+    temp = 1000000000000000
+    arr.sort()
+    for i in range(k-1, n):
+        if abs(arr[i - (k-1)] - arr[i]) < temp:
+            temp = abs(arr[i - (k-1)] - arr[i])
+    
+    return temp
