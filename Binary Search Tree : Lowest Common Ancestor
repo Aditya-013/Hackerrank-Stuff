@@ -1,0 +1,15 @@
+def LCAA(root, v1, v2):
+    if root == None:
+        return
+    
+    if (root.info >= v1 and root.info <= v2) or (root.info <= v1 and root.info >= v2):
+        return root
+    
+    elif root.info < v1 and root.info < v2:
+        return LCAA(root.right, v1, v2)
+    
+    elif root.info > v1 and root.info > v2:
+        return LCAA(root.left, v1, v2)
+    
+def lca(root, v1, v2):
+    return LCAA(root, v1, v2)
