@@ -1,0 +1,33 @@
+def BSearch(cost, temp, j):
+    max1 = len(cost) - 1
+    min1 = j + 1
+    if cost[max1][0] == temp:
+        return max1
+    elif cost[min1][0] == temp:    
+        return min1
+    else:
+        while(max1 > min1):
+            l = int((max1 + min1)/2)
+            if cost[l][0] == temp:
+                return l
+            elif cost[l][0] > temp:
+                max1 = l - 1
+            elif cost[l][0] < temp:
+                min1 = l + 1
+    return -1        
+    
+def whatFlavors(cost, money):  
+    
+    for i in range(0, len(cost)):
+        col = []
+        col.append(cost[i])
+        col.append(i + 1)
+        cost[i] = col
+    cost.sort()   
+    
+    for i in range(0, len(cost)):
+        temp = money - cost[i][0]
+        index = BSearch(cost, temp, i)
+        if index != -1:
+            print(min(cost[index][1], cost[i][1]),max(cost[index][1], cost[i][1]))
+            return
