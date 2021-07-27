@@ -1,0 +1,37 @@
+def maxSubsetSum(arr):
+    
+    # if arr[0] < 0:
+    #     arr[0] = 0
+    
+    # arr[1] = max(arr[0],arr[1])
+    
+    # for i in range(2,len(arr)):
+    #     arr[i] = max(arr[i-1], arr[i]+arr[i-2])
+        
+    # print(arr)
+    # return arr[len(arr)-1]
+    
+    
+    ar = []    
+    for i in range(0, 2):
+        if arr[i] > 0:
+            ar.append(arr[i])
+        else:
+            ar.append(0)
+    
+    if arr[2] > 0:
+        ar.append(arr[2] + ar[0])
+    else:
+        ar.append(arr[0])
+    print(ar)
+    
+    for i in range(3, len(arr)):
+        
+        if arr[i] < 0:
+            ar.append(max(ar[i-2],ar[i-3]))
+            
+        else:         
+            ar.append(arr[i] + max(ar[i-2],ar[i-3]))
+        
+    print(ar)
+    return max(ar)
