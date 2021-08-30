@@ -44,7 +44,7 @@ int main(){
     int k=0;
     int i=n-1;
     int j=m-1;
-    while(i>=0 || j>=0){
+    while(i>=0 && j>=0){
         if(w[i-1] == q[j-1]){
             // lcs[k] = w[i-1];
             lcs.push_back(w[i-1]);
