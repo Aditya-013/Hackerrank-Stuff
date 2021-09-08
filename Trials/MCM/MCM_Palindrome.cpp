@@ -16,7 +16,7 @@ bool isPalindrome(std::string s1, int i, int j){
 }
 
 int Solve(std::string s1, int i, int j){
-    int mn = INT_MAX;
+    int mn = INT_MAX, left, right;
     int temp = 0;
     if(i >= j){
         return 0;
@@ -28,7 +28,17 @@ int Solve(std::string s1, int i, int j){
         return t[i][j] = 0;
     }else{
         for(int k=i; k<j; k++){
-            temp = Solve(s1, i, k) + Solve(s1, k+1, j) + 1;
+            if(t[i][k] != -1){
+                left = t[i][k];
+            }else{
+                left = Solve(s1, i, k);
+            }
+            if(t[k+1][j] != -1){
+                right = t[k+1][j];
+            }else{
+                right = Solve(s1, k+1, j);
+            }
+            temp = left + right + 1;
             if(temp < mn){
                 mn = temp;
             }
@@ -39,7 +49,7 @@ int Solve(std::string s1, int i, int j){
 
 int main(){
     memset(t, -1, sizeof(t));  
-    std::string s1 = "nittinitutin";
+    std::string s1 = "nitin";
     int n = s1.length();  
     int val = Solve(s1, 0, n-1);
     std::cout<<"The minimum number of partitions :: "<<val<<std::endl;
