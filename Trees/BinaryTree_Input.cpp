@@ -27,40 +27,42 @@ void inorder(struct node *root)
 
 int main()
 {
-    struct node *root = new node(10);
+    int val, flag, i = 1;
+    std::cout << "Enter value "<<i++<<" ::";
+    std::cin >> val;
+    struct node *root = new node(val);
     struct node *temp = root;
-    int val, flag;
-    std::cout << root->data << std::endl;
     do
     {
-        std::cout << "Enter new value :: ";
+        std::cout << "Enter value "<<i++<<" ::";
         std::cin >> val;
-        struct node *temp2 = new node(val);
-        while (1)
+        if(val != 0)
         {
-            if (temp->data > val && temp->left != NULL)
+            struct node *temp2 = new node(val);
+            while (1)
             {
-                temp = temp->left;
+                if (temp->data > val && temp->left != NULL)
+                {
+                    temp = temp->left;
+                }
+                else if (temp->data > val && temp->left == NULL)
+                {
+                    temp->left = temp2;
+                    break;
+                }
+                else if (temp->data < val && temp->right != NULL)
+                {
+                    temp = temp->right;
+                }
+                else if (temp->data < val && temp->right == NULL)
+                {
+                    temp->right = temp2;
+                    break;
+                }
             }
-            else if (temp->data > val && temp->left == NULL)
-            {
-                temp->left = temp2;
-                break;
-            }
-            else if (temp->data < val && temp->right != NULL)
-            {
-                temp = temp->right;
-            }
-            else if (temp->data < val && temp->right == NULL)
-            {
-                temp->right = temp2;
-                break;
-            }
+            temp = root;
         }
-        temp = root;
-        std::cout << "More? (1 - Yes | 0 - No) : ";
-        std::cin >> flag;
-    } while (flag != 0);
+    } while (val != 0);
 
     std::cout << "The tree is :: ";
     inorder(root);
